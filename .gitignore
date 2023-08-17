@@ -2,8 +2,6 @@
 ## These files will be included in the published
 ## package but not checked in the source control
 ## Removed when .gitignore is copied into .pubignore
-*.freezed.dart
-*.g.dart
 version.dart
 
 # Libraries should not include pubspec.lock,

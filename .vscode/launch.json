@@ -12,14 +12,14 @@
             "name": "cli",
             "cwd": "packages/widgetbook_cli",
             "request": "launch",
-            "program": "bin/cli_debug.dart",
+            "program": "bin/cli_production.dart",
             "type": "dart",
             "args": [
-                "--api-key", "abc",
-                "--repository", "test-repo",
-                "--actor", "jenshor",
-                "--git-provider", "CLI",
-                "--base-branch", "main"
+               "publish", 
+               "--api-key", 
+               "6JHxrGRSjtQtqQpGB2CcgDY45Uj94j8u", 
+               "--path", "/Users/jenshorstmann/Files/Work/repos/jenshor/flutter-con-berlin-2023/groceries_app",
+               "--base-branch", "staging" 
             ]
         },
         {
