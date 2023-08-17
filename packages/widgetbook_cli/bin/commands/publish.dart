@@ -440,7 +440,8 @@ class PublishCommand extends WidgetbookCommand {
         );
 
         if (buildUploadResponse == null) {
-          throw WidgetbookApiException();
+          logger.success('✅ Build done');
+          return;
         }
 
         for (final task in buildUploadResponse.tasks) {
