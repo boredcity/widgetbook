@@ -434,14 +434,17 @@ class PublishCommand extends WidgetbookCommand {
 
       if (file != null) {
         progress.update('Uploading build');
-        final buildUploadResponse = await uploadDeploymentInfo(
+        var buildUploadResponse = await uploadDeploymentInfo(
+          file: file,
+          args: args,
+        );
+        buildUploadResponse = await uploadDeploymentInfo(
           file: file,
           args: args,
         );
 
         if (buildUploadResponse == null) {
-          logger.success('✅ Build done');
-          return;
+          throw WidgetbookApiException();
         }
 
         for (final task in buildUploadResponse.tasks) {
