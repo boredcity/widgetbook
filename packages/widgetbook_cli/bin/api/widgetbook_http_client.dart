@@ -77,15 +77,22 @@ class WidgetbookHttpClient {
         );
       } on DioException catch (e) {
         final response = e.response;
-        print('Dio exception');
-        print(response);
-        print(response!.data);
-        final errorResponse = _decodeResponse(response.data);
+        if (response == null) {
+          throw WidgetbookDeployException();
+        }
 
-        throw WidgetbookPublishReviewException(
-          message: errorResponse.toString(),
-        );
-        throw WidgetbookPublishReviewException();
+        if (response.data is String) {
+          final data = response.data as String;
+          if (data.contains('<HTML>')) {
+            print('Backend returned HTML.');
+          } else {
+            print(data);
+            throw WidgetbookDeployException(message: data);
+          }
+        } else {
+          final errorResponse = _decodeResponse(response.data);
+          throw WidgetbookDeployException(message: errorResponse.toString());
+        }
       } catch (e) {
         print('General excpetion');
         throw WidgetbookPublishReviewException();
