@@ -73,13 +73,14 @@ class WidgetbookHttpClient {
         );
       } on DioException catch (e) {
         final response = e.response;
-        if (response != null) {
-          final errorResponse = _decodeResponse(response.data);
+        print('Dio exception');
+        print(response);
+        print(response!.data);
+        final errorResponse = _decodeResponse(response.data);
 
-          throw WidgetbookPublishReviewException(
-            message: errorResponse.toString(),
-          );
-        }
+        throw WidgetbookPublishReviewException(
+          message: errorResponse.toString(),
+        );
         throw WidgetbookPublishReviewException();
       } catch (e) {
         throw WidgetbookPublishReviewException();
