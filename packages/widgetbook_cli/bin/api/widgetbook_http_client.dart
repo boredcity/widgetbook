@@ -59,6 +59,11 @@ class WidgetbookHttpClient {
             headSha: headSha,
           ).toJson(),
         );
+        print(
+          jsonEncode(
+            createReviewResponse.data as Map<String, dynamic>,
+          ),
+        );
         return ReviewUploadResponse.fromJson(
           jsonDecode(
             jsonEncode(
