@@ -46,6 +46,7 @@ class WidgetbookHttpClient {
   }) async {
     if (useCases.isNotEmpty) {
       try {
+        print('Uploading review');
         final createReviewResponse = await client.post<dynamic>(
           '/reviews',
           data: CreateUseCasesRequest(
@@ -86,9 +87,11 @@ class WidgetbookHttpClient {
         );
         throw WidgetbookPublishReviewException();
       } catch (e) {
+        print('General excpetion');
         throw WidgetbookPublishReviewException();
       }
     }
+    print('Upload review done');
     return null;
   }
 
@@ -98,6 +101,7 @@ class WidgetbookHttpClient {
     required CreateBuildRequest data,
   }) async {
     try {
+      print('Uploading build');
       final response = await client.post<Map<String, dynamic>>(
         '/builds/deploy',
         data: FormData.fromMap(
@@ -119,6 +123,7 @@ class WidgetbookHttpClient {
       print('Created Build Response');
       print(response);
       print(response.data);
+      print('Upload build done');
       return BuildUploadResponse.fromJson(
         jsonDecode(
           jsonEncode(
@@ -135,8 +140,10 @@ class WidgetbookHttpClient {
 
       throw WidgetbookDeployException(message: errorResponse.toString());
     } catch (e) {
+      print('General excpetion');
       throw WidgetbookDeployException();
     }
+
     return null;
   }
 
