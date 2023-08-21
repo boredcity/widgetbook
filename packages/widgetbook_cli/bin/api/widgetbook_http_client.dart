@@ -77,6 +77,7 @@ class WidgetbookHttpClient {
         );
       } on DioException catch (e) {
         print('Dio exception ${e}');
+        print('Response ${e.response}');
         final response = e.response;
         if (response == null) {
           throw WidgetbookDeployException();
