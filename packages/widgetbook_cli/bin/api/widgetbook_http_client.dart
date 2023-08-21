@@ -76,6 +76,7 @@ class WidgetbookHttpClient {
           ) as Map<String, dynamic>,
         );
       } on DioException catch (e) {
+        print('Dio exception ${e}');
         final response = e.response;
         if (response == null) {
           throw WidgetbookDeployException();
