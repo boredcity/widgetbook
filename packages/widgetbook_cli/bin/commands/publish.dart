@@ -479,7 +479,7 @@ class PublishCommand extends WidgetbookCommand {
               'See https://docs.widgetbook.io/widgetbook-cloud/review for more '
               'information.',
             );
-            throw ReviewNotFoundException();
+            return;
           }
 
           progress.update('Uploading review');
