@@ -141,6 +141,7 @@ class WidgetbookHttpClient {
         ) as Map<String, dynamic>,
       );
     } on DioException catch (e) {
+      print(e);
       final response = e.response;
       if (response == null) {
         throw WidgetbookDeployException();
@@ -159,6 +160,7 @@ class WidgetbookHttpClient {
         throw WidgetbookDeployException(message: errorResponse.toString());
       }
     } catch (e) {
+      print(e);
       print('General excpetion');
       throw WidgetbookDeployException();
     }
