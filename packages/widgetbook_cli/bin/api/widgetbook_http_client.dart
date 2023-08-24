@@ -27,7 +27,7 @@ class WidgetbookHttpClient {
       case DeploymentStrategy.staging:
         return 'https://staging.api.widgetbook.io/v1/';
       case DeploymentStrategy.debug:
-        return 'http://localhost:3000/v1/';
+        return 'http://localhost:3100/v1/';
     }
   }
 
