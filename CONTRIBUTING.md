@@ -1,49 +1,79 @@
 # Contributing to Widgetbook
 
-👍 First off, thanks for taking the time to contribute! 👍
+Widgetbook is an open source project and we love to receive contributions from our community —
+you! 💙 There are countless ways to contribute to the project:
 
-The following is a set of guidelines for contributing to Widgetbook and its packages.
-These are mostly guidelines, not rules. Use your best judgment,
-and feel free to propose changes to this document in a pull request.
+1.  [Develop new features](#develop-new-features)
+1.  Fix bugs
+1.  Increase test coverage.
+1.  Improve documentation.
+1.  Add examples.
 
-## Proposing a Change
+## Develop new features
 
-If you intend to change the public API, or make any non-trivial changes
-to the implementation, we recommend filing an issue.
-This lets us reach an agreement on your proposal before you put significant
-effort into it.
+We are always looking to add new features and enhancements to make Widgetbook better for everyone. Aligning with the maintainers on the proposed changes will save you time and effort. New features and enhancements are reviewed for good fit as not all ideas will be selected, so it's best to have discussion about the enhancement first. Follow the steps below to get started:
 
-If you’re only fixing a bug, it’s fine to submit a pull request right away
-but we still recommend to file an issue detailing what you’re fixing.
-This is helpful in case we don’t accept that specific fix but want to keep
-track of the issue.
+1. Choose an [existing issue](https://github.com/widgetbook/widgetbook/labels/enhancement) with the enhancement label or create a [new issue](https://github.com/widgetbook/widgetbook/issues/new) if the feature you want to work on is not in the list.
+1. Comment on the issue to let others know you are working on it.
+1. [Submit a PR](#submitting-pr) with your changes.
 
-## Creating a Pull Request
+## Submitting PR
 
-Before creating a pull request please:
+> [!WARNING]
+> Any PRs opened without a corresponding issue may be rejected.
 
-1. Fork the repository and create your branch from `master`.
-1. Install all dependencies (`flutter packages get` or `pub get`).
-1. Squash your commits and ensure you have a meaningful commit message.
-1. If you’ve fixed a bug or added code that should be tested, add tests!
-1. Ensure the test suite passes.
-1. If you've changed the public API, make sure to update/add documentation.
-1. Format your code (`dartfmt -w .`).
-1. Analyze your code (`dartanalyzer --fatal-infos --fatal-warnings .`).
+1. Fork the repository & clone your fork.
+
+   ```bash
+   git clone https://github.com/<YOUR_USERNAME>/widgetbook.git
+   ```
+
+1. Install [melos](https://pub.dev/packages/melos).
+
+   ```bash
+   dart pub global activate melos
+   ```
+
+1. Bootstrap the repository.
+
+   ```bash
+   cd widgetbook
+   flutter pub get  # Install melos in the root package
+   melos bootstrap  # Install dependencies
+   melos generate   # Generate build files
+   ```
+
+1. Create a branch based on `main`.
 1. Sign the [Contributor License Agreement](https://docs.google.com/forms/d/e/1FAIpQLScuRfjUzENsLsmQgqZlGLxMKbFi7zuXoPARyXytoyQrq7ntUw/viewform).
-1. Create the Pull Request.
-1. Verify that all status checks are passing.
+1. Make your changes.
+1. Push your changes and submit a PR.
+1. Write a good PR title (as described below) & fill a details description
 
-While the prerequisites above must be satisfied prior to having your
-pull request reviewed, the reviewer(s) may ask you to complete additional
-design work, tests, or other changes before your pull request can be ultimately
-accepted.
+## PR title Conventions
 
-## Adding an example
+We follow [conventional commits](https://www.conventionalcommits.org/en/v1.0.0/)
 
-Examples live in the `examples` folder.
+### Types
 
-When you're adding an example, make sure to add CI checks for it.
+| Type       | Description                                               |
+| ---------- | --------------------------------------------------------- |
+| `feat`     | A new feature                                             |
+| `fix`      | A bug fix                                                 |
+| `refactor` | A code change that neither fixes a bug nor adds a feature |
+| `docs`     | Documentation only changes                                |
+| `test`     | Adding missing tests or correcting existing tests         |
+| `chore`    | Changes to the build process or auxiliary tools           |
+| `ci`       | Changes to our CI configuration files and scripts         |
+
+### Scopes
+
+| Scope        | Description                                         |
+| ------------ | --------------------------------------------------- |
+| no scope     | Changes that affect `widgetbook` package            |
+| `cli`        | Changes that affect `widgetbook_cli` package        |
+| `annotation` | Changes that affect `widgetbook_annotation` package |
+| `generator`  | Changes that affect `widgetbook_generator` package  |
+| `release`    | Commits that pumps versions                         |
 
 ## Getting in Touch
 
