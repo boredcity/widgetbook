@@ -438,10 +438,6 @@ class PublishCommand extends WidgetbookCommand {
           file: file,
           args: args,
         );
-        buildUploadResponse = await uploadDeploymentInfo(
-          file: file,
-          args: args,
-        );
 
         if (buildUploadResponse == null) {
           throw WidgetbookApiException();
