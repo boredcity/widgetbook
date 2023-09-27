@@ -1,12 +1,14 @@
 import 'dart:convert';
 
 import 'package:file/file.dart';
+import 'package:mason_logger/mason_logger.dart';
 import 'package:path/path.dart' as path;
 
 abstract class GeneratorParser<T> {
   GeneratorParser({
     required this.projectPath,
     required this.fileSystem,
+    required this.logger,
   });
   static const dartToolFolderName = '.dart_tool';
   static const buildFolderName = 'build';
@@ -14,6 +16,7 @@ abstract class GeneratorParser<T> {
 
   final FileSystem fileSystem;
   final String projectPath;
+  final Logger logger;
 
   String get dartToolPath => path.join(
         projectPath,

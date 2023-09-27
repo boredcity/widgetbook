@@ -13,6 +13,7 @@ class UseCaseParser extends GeneratorParser<ChangedUseCase> {
   UseCaseParser({
     required this.baseBranch,
     required super.projectPath,
+    required super.logger,
     super.fileSystem = const LocalFileSystem(),
   });
 
@@ -26,14 +27,21 @@ class UseCaseParser extends GeneratorParser<ChangedUseCase> {
 
   Iterable<UseCaseData> _getUseCasesFromFiles(List<File> files) sync* {
     for (final file in files) {
+      logger.detail('[DEBUG] File : ${file.path}');
+
       final items = json.decode(
         file.readAsStringSync(),
       ) as Iterable<dynamic>;
+
+      logger.detail('        Items : ${items.length}');
+
       final useCases = List<UseCaseData>.from(
         items.map<UseCaseData>(
           _getUseCase,
         ),
       );
+
+      logger.detail('        UCs   : ${useCases.length}');
 
       yield* useCases;
     }
@@ -77,16 +85,27 @@ class UseCaseParser extends GeneratorParser<ChangedUseCase> {
 
   @override
   Future<List<ChangedUseCase>> parse() async {
+    logger.detail('[DEBUG] Parsing use-cases');
+    logger.detail('[DEBUG] Dart Tool   : $dartToolPath');
+    logger.detail('[DEBUG] Build       : $buildPath');
+    logger.detail('[DEBUG] Gen Folder  : $generatedFolderPath');
+    logger.detail('[DEBUG] Files Exist : $doesGeneratedFilesFolderExist');
+
     // TODO we should be able to remove this
     if (fileSystem.isDirectorySync(generatedFolderPath)) {
       // TODO we should do this first
-      if (!await GitDir.isGitDir(projectPath)) {
+      final isGitDir = await GitDir.isGitDir(projectPath);
+      logger.detail('[DEBUG] Git : $isGitDir');
+
+      if (!isGitDir) {
         return [];
       }
 
       final files =
           getFilesFromGeneratedFolder(fileExtension: '.usecase.widgetbook.json')
               .toList();
+
+      logger.detail('[DEBUG] Files : ${files.length}');
 
       // TODO use getItemsFromFiles instead!
       final useCases = _getUseCasesFromFiles(files).toList();

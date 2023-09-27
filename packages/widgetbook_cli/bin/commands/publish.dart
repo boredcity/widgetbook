@@ -61,6 +61,7 @@ class PublishCommand extends WidgetbookCommand {
         _platformWrapper = platformWrapper ?? PlatformWrapper(),
         _useCaseParser = useCaseParser,
         _fileSystem = fileSystem ?? const LocalFileSystem() {
+    logger.level = Level.verbose;
     progress = logger.progress('Publishing Widgetbook');
     argParser
       ..addOption(
@@ -414,17 +415,28 @@ class PublishCommand extends WidgetbookCommand {
       'build',
       'web',
     );
+    logger.detail('[DEBUG] Build path: $buildPath');
 
     final baseBranch = args.baseBranch;
+    logger.detail('[DEBUG] Base branch: ${baseBranch}');
+
     final baseSha = args.baseSha;
+
     final directory = _fileSystem.directory(buildPath);
+    logger.detail('[DEBUG] Directory: ${directory.path}');
+
     final useCases = await _useCaseParser?.parse() ??
         (baseBranch == null
             ? []
             : await UseCaseParser(
                 projectPath: args.path,
                 baseBranch: baseBranch,
+                logger: logger,
               ).parse());
+
+    logger.detail(
+      '[DEBUG] Change UCs : ${useCases.map((e) => e.name).join(', ')}',
+    );
 
     progress.update('Detected ${useCases.length} changed use-case(s)');
 

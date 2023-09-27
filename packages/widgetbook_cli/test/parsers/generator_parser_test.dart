@@ -1,4 +1,5 @@
 import 'package:file/memory.dart';
+import 'package:mason_logger/mason_logger.dart';
 import 'package:test/test.dart';
 
 import '../../bin/parsers/generator_parser.dart';
@@ -7,6 +8,7 @@ class TestGenerator<T> extends GeneratorParser<T> {
   TestGenerator({
     required super.projectPath,
     required super.fileSystem,
+    required super.logger,
   });
 
   @override
@@ -23,6 +25,7 @@ void main() {
   setUp(
     () {
       generator = TestGenerator(
+        logger: Logger(),
         projectPath: projectPath,
         fileSystem: MemoryFileSystem(),
       );
